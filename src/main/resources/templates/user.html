@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+    TRANG THÔNG TIN NGƯỜI DÙNG - USER.HTML
+    
+    Hiển thị sau khi đăng nhập thành công.
+    Nhận dữ liệu từ HomeController: name, email, picture
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Cho phép load ảnh từ Google -->
+    <meta name="referrer" content="no-referrer">
+    <title>Thông tin người dùng</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <!-- Ảnh đại diện: hiển thị ảnh Google hoặc chữ cái đầu -->
+        <div th:if="${picture}">
+            <img th:src="${picture}" alt="Ảnh đại diện" class="avatar" referrerpolicy="no-referrer">
+        </div>
+        <div th:unless="${picture}" class="avatar-placeholder">
+            <span th:text="${name != null ? name.substring(0, 1).toUpperCase() : '?'}">?</span>
+        </div>
+        
+        <!-- Tên và email người dùng -->
+        <h1 th:text="${name}">Tên người dùng</h1>
+        <p class="email" th:text="${email}">email@example.com</p>
+        
+        <!-- Thông báo đăng nhập thành công -->
+        <span class="badge-success">✓ Đăng nhập thành công với Google</span>
+        
+        <!-- Nút đăng xuất -->
+        <a href="/logout" class="btn-logout">Đăng xuất</a>
+    </div>
+</body>
+</html>
